@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='cartridge-stripe',
-    version='0.1.0',
+    version='0.1.1',
     author='Timothy Watts (readevalprint)',
     author_email='tim@readevalprint.com',
     packages=['cartridge_stripe'],
