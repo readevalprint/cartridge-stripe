@@ -9,5 +9,5 @@ setup(
     url='https://github.com/readevalprint/cartridge-stripe/',
     license='LICENSE.txt',
     description='Stripe credit card processing integration with Cartridge',
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
 )
