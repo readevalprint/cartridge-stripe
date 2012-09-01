@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load shop_tags mezzanine_tags i18n %}
+{% load zebra_tags %}
+
+{% block meta_title %}{% trans "Checkout" %} - {{ step_title }}{% endblock %}
+{% block title %}{% trans "Checkout" %} - {% trans "Step" %} {{ step }} {% trans "of" %} {{ steps|length }}{% endblock %}
+{% block body_id %}checkout{% endblock %}
+
+{% block extra_head %}
+  <script>
+    var _gaq = [['_trackPageview', '{{ request.path }}{{ step_url }}/']];
+    $(function() {$('.middle :input:visible:enabled:first').focus();});
+  </script>
+  {% zebra_head_and_stripe_key %}
+{% endblock %}
+
+{% block breadcrumb_menu %}
+  {% for step in steps %}
+    <li>
+    {% if step.title == step_title %}
+      <strong>{{ step.title }}</strong>
+    {% else %}
+      {{ step.title }}
+    {% endif %}
+    <span class="divider">/</span>
+    </li>
+  {% endfor %}
+  <li>{% trans "Complete" %}</li>
+{% endblock %}
+
+{% block main %}
+
+  {% if request.cart.has_items %}
+    <div class="panel checkout-panel span3">
+      <ul class="unstyled">
+        {% for item in request.cart %}
+          <li>
+          {% if item.image %}
+            <img alt="{{ item.description }}" src="{{ MEDIA_URL }}{% thumbnail item.image 30 30 %}">
+          {% endif %}
+          {{ item.quantity }} x {{ item.description }}
+          <span class="price">{{ item.total_price|currency }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      {% order_totals %}
+      <br style="clear:both;">
+      <a class="btn" href="{% url shop_cart %}">{% trans "Edit Cart" %}</a>
+    </div>
+  {% endif %}
+
+  <section id="checkout-form">
+    <form method="post" id="payment-form" class="form-horizontal form-shop span8">
+      <noscript><h3>{% trans "Note: this form requires Javascript to use." %}</h3></noscript>
+      {% csrf_token %}
+
+      {% with form.non_field_errors as errors %}
+        {% if errors %}
+          <div class="control-group error non-field-errors">
+            {% for error in errors %}
+              <span class="help-inline">{{ error }}</span>
+            {% empty %}
+              <span class="help-inline">{% trans "Please correct the errors below." %}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block fields %}{% endblock %}
+      <div class="payment-errors"></div>
+
+      {% if request.cart.has_items %}
+        <div class="form-actions clearfix">
+          <div class="form-actions-wrap">
+            {% if step == steps|length %}
+              <button type="submit" class="btn btn-large btn-primary submit-button" value="{% trans "Next" %}">{% trans "Checkout" %}</button>
+            {% else %}
+              <button type="submit" class="btn btn-large btn-primary submit-button" value="{% trans "Next" %}">{% trans "Continue" %}</button>
+            {% endif %}
+            {% if not CHECKOUT_STEP_FIRST %}
+              <input type="submit" class="btn btn-large" name="back" value="{% trans "Back" %}">
+            {% endif %}
+          </div>
+        </div>
+      {% else %}
+        <p>{% trans "Your cart is empty." %}</p>
+        <p>{% trans "This may be due to your session timing out after a period of inactivity." %}</p>
+        <p>{% trans "We apologize for the inconvenience." %}</p>
+        <br>
+        <p><a class="btn btn-large btn-primary" href="{% url page "shop" %}">{% trans "Continue Shopping" %}</a></p>
+      {% endif %}
+
+    </form>
+  </section>
+
+{% endblock %}
