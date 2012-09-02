@@ -31,4 +31,29 @@ or copy it to your templates dir.
         )
 
 
+=======
+Style
+=======
 
+Add some sort of style for 'div.payment-errors' which will display validation
+errors from stripe.
+
+::
+
+    div.payment-errors {
+        color: #F00;
+    }
+
+
+=====
+Done!
+=====
+
+Now your checkout flow should have card validation and the Stripe order number
+linked to the purchase.
+
+=====
+Feedback
+=====
+
+I'm open to bugs and pull requests. Just run pep8 first.

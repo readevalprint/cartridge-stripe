@@ -21,7 +21,6 @@ from cartridge.shop.models import Product, ProductOption, ProductVariation
 from cartridge.shop.models import Cart, CartItem, Order, DiscountCode
 from cartridge.shop.utils import make_choices, set_locale, set_shipping
 
-
 from zebra.conf import options
 from zebra.widgets import NoNameSelect, NoNameTextInput
 from zebra.forms import CardForm, StripePaymentForm
@@ -47,8 +46,8 @@ class OrderForm(FormsetForm, DiscountForm):
         widget=NoNameTextInput())
     card_cvv = forms.CharField(required=False, max_length=4,
         widget=NoNameTextInput())
-    card_expiry_month = forms.ChoiceField(required=False, widget=NoNameSelect(),
-        choices=MONTHS.iteritems())
+    card_expiry_month = forms.ChoiceField(required=False,
+        widget=NoNameSelect(), choices=MONTHS.iteritems())
     card_expiry_year = forms.ChoiceField(required=False, widget=NoNameSelect(),
         choices=options.ZEBRA_CARD_YEARS_CHOICES)
     last_4_digits = forms.CharField(required=True, min_length=4, max_length=4,
@@ -64,8 +63,6 @@ class OrderForm(FormsetForm, DiscountForm):
             f.name.startswith("billing_detail") or
             f.name.startswith("shipping_detail")] +
             ["additional_instructions", "discount_code"])
-
-
 
     def __init__(self, request, step, data=None, initial=None, errors=None):
         """
@@ -143,5 +140,3 @@ class OrderForm(FormsetForm, DiscountForm):
         if self._checkout_errors:
             raise forms.ValidationError(self._checkout_errors)
         return self.cleaned_data
-
-
