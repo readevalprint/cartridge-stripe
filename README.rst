@@ -10,9 +10,15 @@ Stripe_ credit card processing integration with Cartridge_.
 Install
 ==========
 
-`pip install cartridge-stripe`
+Follow the installation instructions of django-zebra_.
 
-add to `INSTALLED_APPS` above `cartridge.shop` to override the checkout template
+.. _django-zebra: https://github.com/GoodCloud/django-zebra#installation
+
+::
+
+    pip install cartridge-stripe
+
+add to 'INSTALLED_APPS' above 'cartridge.shop' to override the checkout template
 or copy it to your templates dir.
 
 ::
@@ -23,4 +29,6 @@ or copy it to your templates dir.
         'cartridge.shop',
         # More stuff...
         )
+
+
 
