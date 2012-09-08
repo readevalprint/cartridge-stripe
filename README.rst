@@ -31,6 +31,12 @@ or copy it to your templates dir.
         )
 
 
+Update the `SHOP_HANDLER_PAYMENT` to use your shiney new app.
+
+::
+
+    SHOP_HANDLER_PAYMENT = "cartridge_stripe.payment_handler"
+
 =======
 Style
 =======
