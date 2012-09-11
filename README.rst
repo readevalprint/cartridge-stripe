@@ -18,8 +18,9 @@ Follow the installation instructions of django-zebra_.
 
     pip install cartridge-stripe
 
-add to 'INSTALLED_APPS' above 'cartridge.shop' to override the checkout template
-or copy it to your templates dir.
+Update the settings.py to use your shiney new app.
+Add it to 'INSTALLED_APPS' above 'cartridge.shop' to override the checkout template
+or copy it to the templates dir in your project.
 
 ::
 
@@ -31,11 +32,8 @@ or copy it to your templates dir.
         )
 
 
-Update the `SHOP_HANDLER_PAYMENT` to use your shiney new app.
-
-::
-
-    SHOP_HANDLER_PAYMENT = "cartridge_stripe.payment_handler"
+    SHOP_HANDLER_PAYMENT = 'cartridge_stripe.payment_handler'
+    SHOP_CHECKOUT_FORM_CLASS = 'cartridge_stripe.forms.OrderForm' 
 
 =======
 Style
