@@ -29,11 +29,15 @@ or copy it to the templates dir in your project.
         'cartridge_stripe',
         'cartridge.shop',
         # More stuff...
+        'zebra',
         )
 
 
     SHOP_HANDLER_PAYMENT = 'cartridge_stripe.payment_handler'
-    SHOP_CHECKOUT_FORM_CLASS = 'cartridge_stripe.forms.OrderForm' 
+    SHOP_CHECKOUT_FORM_CLASS = 'cartridge_stripe.forms.OrderForm'
+
+    ZEBRA_ENABLE_APP = True
+
 
 =======
 Style
