@@ -45,7 +45,7 @@
       </ul>
       {% order_totals %}
       <br style="clear:both;">
-      <a class="btn" href="{% url shop_cart %}">{% trans "Edit Cart" %}</a>
+      <a class="btn" href="{% url "shop_cart" %}">{% trans "Edit Cart" %}</a>
     </div>
   {% endif %}
 
@@ -87,7 +87,7 @@
         <p>{% trans "This may be due to your session timing out after a period of inactivity." %}</p>
         <p>{% trans "We apologize for the inconvenience." %}</p>
         <br>
-        <p><a class="btn btn-large btn-primary" href="{% url page "shop" %}">{% trans "Continue Shopping" %}</a></p>
+        <p><a class="btn btn-large btn-primary" href="{% url "page" "shop" %}">{% trans "Continue Shopping" %}</a></p>
       {% endif %}
 
     </form>
