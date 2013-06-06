@@ -3,3 +3,5 @@ cartridge_stripe/__init__.py
 cartridge_stripe/forms.py
 cartridge_stripe/models.py
 cartridge_stripe/views.py
+cartridge_stripe/views.py
+cartridge_stripe/templates/shop/checkout.html
